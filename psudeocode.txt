@@ -1,0 +1,27 @@
+save progress of the user in the csv
+1. startup screen
+player chooses difficulty 
+2. txt files containing easy, medium and hard sentences
+3. import sentences from the text file
+4. display the text
+5. countdown begins  and timer starts after that
+6. user starts typing
+
+7. key to exit the test, 
+if (program = exit)   
+ 	A #score calculation : https://indiatyping.com/index.php/typing-tips/typing-speed-calculation-formula
+ 	# Accuracy it compares to the original string
+    # overall score 
+    score display
+else :
+	score calculation
+	score display
+
+8. WPM, Accuracy	
+
+9. play again or exit
+if play again :
+	JUMP to step 1:
+	
+							 
+
