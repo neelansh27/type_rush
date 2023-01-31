@@ -1,3 +1,3 @@
 compile:
-	gcc -lncurses main.c -o type_rush
+	gcc main.c -o type_rush -lncurses
 	./type_rush
