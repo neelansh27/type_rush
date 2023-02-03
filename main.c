@@ -40,19 +40,21 @@ int startup(int x, int y) {
   wrefresh(menu);
   return highlight;
 }
+
 void* timer() {
   int x, y;
   getmaxyx(stdscr, y, x);
-  WINDOW *Timer = newwin(3, 16, 2, (int)x / 2 + x / 4);
+  WINDOW *Timer = newwin(3, 17, 2, (int)x / 2 + x / 4);
   box(Timer, 0, 0);
-  for (int i=1; i<61; ++i) {
-    mvwprintw(Timer, 1, 1, "Time Passed:%d", i);
+  for (int i=60; i>0; --i) {
+    mvwprintw(Timer, 1, 1, "Time Left: %ds", i);
     wrefresh(Timer);
     sleep(1);
   }
   return 0;
 }
-int main(int argc, char *argv[]) {
+
+int main() {
   // Initializing screen
   initscr();
   cbreak();

@@ -1,0 +1,38 @@
+* Type Rush
+An utility made in C (chad) Programming Language to improve your typing speed and accuracy.
+
+** Modules Used
+
+ - stdio.h
+ - unistd.h
+ - curses.h
+ - ncurses.h
+ - pthread.h
+
+** Installation of modules
+*** ncurses
+#+begin_src shell
+
+#apt package manager
+sudo apt install libncurses5-dev libncursesw5-dev
+
+#yum package manager
+sudo yum install ncurses-devel
+
+#dnf package manager
+sudo dnf install ncurses-devel
+
+#AUR
+yay -S ncurses
+#+end_src
+
+*** pthread
+#+begin_src shell
+sudo apt-get install libpthread-stubs0-dev
+#+end_src
+
+** Compilation
+Here's an example of compiling the program using gcc
+#+begin_src shell
+gcc main.c -lpthread -lncurses -o type_rush
+#+end_src
