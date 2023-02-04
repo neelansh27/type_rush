@@ -1,5 +1,6 @@
 * Type Rush
 An utility made in C (chad) Programming Language to improve your typing speed and accuracy.
+To quit out of program, simply press escape key.
 
 ** Modules Used
 
@@ -27,6 +28,7 @@ yay -S ncurses
 #+end_src
 
 *** pthread
+Pthread is usally pre-installed but here's an example of how to download it using apt package manager
 #+begin_src shell
 sudo apt-get install libpthread-stubs0-dev
 #+end_src
