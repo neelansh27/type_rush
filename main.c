@@ -73,8 +73,12 @@ int main() {
   //USER INPUT
   int index=0,display_text;
   char input[2000];
+  input[0]='\0';
   row=1;col=1;
-  while ((display_text=wgetch(win))!=27 && game ) {
+  while ((display_text=wgetch(win))!=27) {
+    if (!game){
+      break;
+    }
     curs_set(1);
     if (col==(x/2-1)){
       wmove(win, ++row, col=1);
@@ -109,8 +113,8 @@ int main() {
         wattroff(win, COLOR_PAIR(3));
         wrefresh(win);
         col++;
-        }
       }
+    }
   }
   //Stopping the time if user ended the game abruptly
   pthread_cancel(Time_thread);
@@ -133,7 +137,7 @@ int main() {
   mvwprintw(res, 0, 4, "Statistics");
   mvwprintw(res, 2, 1, "NET WPM  :%.2f",n_wpm);
   mvwprintw(res, 3, 1, "GROSS WPM:%.2f",g_wpm);
-  mvwprintw(res, 4, 1, "ERRORS :%d",err);
+  mvwprintw(res, 4, 1, "ERRORS   :%d",err);
   mvwprintw(res, 5, 1, "ACCURACY :%.2f",acc);
   wrefresh(res);
   attron(COLOR_PAIR(4));
@@ -163,8 +167,8 @@ int startup(int x, int y) {
     for (int i = 0; i < 3; i++) {
       if (i == highlight)
         wattron(menu, A_REVERSE);
-      mvwprintw(menu, i + 4, x / 10 - 4 + i, "%s", opts[i]);
-      wattroff(menu, A_REVERSE);
+        mvwprintw(menu, i + 4, x / 10 - 4 + i, "%s", opts[i]);
+        wattroff(menu, A_REVERSE);
     }
     choice = wgetch(menu);
     switch (choice) {
@@ -231,8 +235,11 @@ int errors(char text[], char user_input[])
 
 float gross_wpm(int len_text, float ttime)
 {
+    if (!len_text){
+      return 0;
+    }
     float words = (float)len_text / 5;
-    float words_per_min = words / ttime;
+    float words_per_min = words/ttime;
     return words_per_min;
 }
 
@@ -244,6 +251,9 @@ float net_wpm(int len_text, int error, float ttime)
 }
 float accuracy(float net_wpm, float gross_wpm)
 {
+    if (gross_wpm==0){
+      return 0;
+    }
     float per_acc = (net_wpm/gross_wpm) * 100;
     return per_acc;
 }
