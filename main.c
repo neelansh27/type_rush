@@ -56,9 +56,6 @@ int main() {
   wattroff(win,COLOR_PAIR(1));
   wmove(win, 1, 1);
   wrefresh(win);
-  //Using Multithreading to run timer in background
-  pthread_t Time_thread;
-  pthread_create(&Time_thread, NULL, timer, NULL);
   int row=1,col=1;
   wattron(win, COLOR_PAIR(2));
   for (int i = 0; i < strlen(dummy_text[mode]);i++) {
@@ -70,6 +67,11 @@ int main() {
   }
   wattroff(win, COLOR_PAIR(2));
   wrefresh(win);
+
+  //Using Multithreading to run timer in background
+  pthread_t Time_thread;
+  pthread_create(&Time_thread, NULL, timer, NULL);
+
   //USER INPUT
   int index=0,display_text;
   char input[2000];
@@ -106,9 +108,17 @@ int main() {
         break;
       default:
      if (row<=20) {
-        wattron(win, COLOR_PAIR(3));
         input[index]=display_text;
         input[++index]='\0';
+        if (input[index-1]!=dummy_text[mode][index-1]) {
+          wattron(win, COLOR_PAIR(4));
+          mvwprintw(win , row, col, "%c",display_text);
+          wattroff(win, COLOR_PAIR(4));
+          wrefresh(win);
+          col++;
+          continue;
+        }
+        wattron(win, COLOR_PAIR(3));
         mvwprintw(win , row, col, "%c",display_text);
         wattroff(win, COLOR_PAIR(3));
         wrefresh(win);
